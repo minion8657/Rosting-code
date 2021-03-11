@@ -10,6 +10,7 @@ users_text = []
 bots = ["bob", "jeff", "zaphod", "quark_killa", "alex", "stuart", "felix", "your dad", "Lily", "I'm a bot"]
 
 print("Hi, welcome to my nice frienly chat room. Its a safe space.")
+hello.hello()
 name = input("Whats your user name? ")
 insults = [random_insult(), "Wow, you're so lame", "Who's this stupid guy?", f"Nice to meet you {name.capitalize()}", "You’re the reason God created the middle finger", "You’re a grey sprinkle on a rainbow cupcake", "Light travels faster than sound, which is why you seemed bright until you spoke", "I’ll never forget the first time we met. But I’ll keep trying"]
 print("")
