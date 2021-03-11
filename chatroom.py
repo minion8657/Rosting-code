@@ -22,25 +22,3 @@ while True:
         if random.randint(1, 7) == 1:
             print(f"{random.choice(bots).capitalize()}:> {random.choice(users_text).capitalize()}")
     wait += 1
-
-
-
-
-# while x < 10:
-#     print(x)
-#     print("This isn't 10 yet")
-#     x = x + 1
-#
-#
-# print(f"x is now {x}")
-#
-# Hi=9
-#
-# while Hi > 2:
-#     print(Hi)
-#     print("This is bigger than 2")
-#     Hi=Hi-1
-# print(f"Hi is now {Hi}")
-# print("Hi is now Weak")
-# print(f"The cube of {Hi} is {Hi**3}")
-# print(f"We calculated the cube of x in a print sting but the value of x is still {Hi}")
