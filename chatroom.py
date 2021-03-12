@@ -1,5 +1,15 @@
 import random
+from os import system, name
+from colorama import init, Fore
+init(autoreset = True) #Set autoreset to True else style configurations would be forwarded to the next print statement
 import modules.bot_code as bot_code # we can put our bot functions in here and reference them with bot_code.function_name()
+
+def clear():
+    if name == 'nt':
+        _ = system('cls')
+    else:
+        _ = system('clear')
+clear()
 
 # insults = ["Thats a lame sentence.", "That was a crappy sentence.", "Wow, you should get some English lessons."]
 def random_insult():
@@ -27,9 +37,15 @@ bots = ["bob",
         "David camreon",
         "Jerremy Corbyn",
         "Glee"]
-
+bot_padding = max(len(e) for e in bots)+8
+print(bot_padding)
 print("Hi, welcome to my nice frienly chat room. Its a safe space.")
-name = input("Whats your user name? ")
+name = input(f"Whats your user name? {Fore.GREEN}")
+print("~"*100)
+print(f"Welcome to the chatroom {Fore.GREEN}{name}{Fore.WHITE}, please follow the chat rules and remember to have fun. ")
+print("~"*100)
+print(f"There are currently {Fore.BLUE}{random.randint(17,35)}{Fore.WHITE} people in the chatroom.")
+
 insults = [ random_insult(),
             "Wow, you're so lame",
             "Who's this stupid guy?",
@@ -61,15 +77,18 @@ print("")
 wait = 0
 
 # testing the bot_code module
-for i in range(10):
-    print(bot_code.get_targeted_insult(bots, ["Hey <$botname$>, whats up?"]))
-
+# for i in range(10):
+#     print(bot_code.get_targeted_insult(bots, ["Hey <$botname$>, whats up?"]))
 
 while True:
     # print("(ノಠ益ಠ)ノ彡┻━┻")
-    users_text.append(input(f"{name.capitalize()}:> "))
-    print(f"{random.choice(bots).capitalize()}:> {random.choice(insults)}")
-    if wait >= 10:
+    bot_prompt = f"{Fore.GREEN}{random.choice(bots).capitalize()}:> " # using colorama.Fore function to colour the text
+    user_prompt = f"{Fore.GREEN}{name.capitalize()}:> " # using colorama.Fore function to colour the text
+
+    users_text.append(input(f"{user_prompt.rjust(bot_padding)}{Fore.WHITE}")) # get user input, and justify the text
+
+    print(f"{bot_prompt.rjust(bot_padding)}{Fore.WHITE}{random.choice(insults)}") # start printing some bot responses
+    if wait >= 10: # after to rounds start adding the occasional bot repeating user input
         if random.randint(1, 7) == 1:
-            print(f"{random.choice(bots).capitalize()}:> {random.choice(users_text).capitalize()}")
+            print(f"{bot_prompt.rjust(bot_padding)}{Fore.WHITE}{random.choice(users_text).capitalize()}")
     wait += 1
