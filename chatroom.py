@@ -4,27 +4,20 @@ import modules.bot_code as bot_code # we can put our bot functions in here and r
 from colorama import init, Fore
 init(autoreset = True) #Set autoreset to True else style configurations would be forwarded to the next print statement
 
-console.clear()
-
-# insults = ["Thats a lame sentence.", "That was a crappy sentence.", "Wow, you should get some English lessons."]
-def random_insult():
-    global bots
-    insults = [ f"Die {random.choice(bots).capitalize()}",
-                f"Oi, {random.choice(bots).capitalize()}. Why don't you get lost",
-                f"Has anyone seen {random.choice(bots).capitalize()}?"]
-    return random.choice(insults)
+console.clear() # clear the sceen
+console.clear_temp_data(["data/all_users.txt"]) # wipe the list of all users
 
 users_text = []
-bots = console.load_current_users()
+bots = console.load_bot_users() # load up all the bot users from file
 bot_padding = max(len(e) for e in bots)+8
-insults = console.load_bot_posts()
-wait = 0
+insults = console.load_bot_posts() # load up all the insults from file
 
 # here is the chatroom welcome screen
 print("Hi, welcome to my nice frienly chat room. Its a safe space.")
-name = input(f"Whats your user name? {Fore.GREEN}")
-all_users = console.load_current_users()
-all_users.append(name.lower())
+name = input(f"Whats your user name? {Fore.GREEN}") # get the users name
+all_users = console.load_bot_users() # create the list of all users (bots and new user)
+all_users.append(name)
+console.save_all_users(all_users) # save this to a file
 
 print(f"{Fore.WHITE}")
 print(f"~"*100)
@@ -35,15 +28,19 @@ print("")
 
     # "(ノಠ益ಠ)ノ彡┻━┻"]
 
+wait = 0
 while True:
     # print("(ノಠ益ಠ)ノ彡┻━┻")
-    bot_prompt = f"{Fore.GREEN}{random.choice(bots).capitalize()}:> " # using colorama.Fore function to colour the text
-    user_prompt = f"{Fore.GREEN}{name.capitalize()}:> " # using colorama.Fore function to colour the text
+    # build the user prompts
+    bot_prompt = f"{Fore.GREEN}{random.choice(bots).title()}:> " # using colorama.Fore function to colour the text
+    user_prompt = f"{Fore.GREEN}{name.title()}:> " # using colorama.Fore function to colour the text
 
     # user does input
     user_input = input(f"{user_prompt.rjust(bot_padding)}{Fore.WHITE}") # get user input, and justify the text
     users_text.append(user_input)
     console.log_user_post(user_input)
+
+    print(bot_code.parse_keywords(user_input))
 
     # bot replies
     bot_selection = random.choice(insults)
@@ -58,3 +55,7 @@ while True:
             users_text = console.load_user_log()
             print(f"{bot_prompt.rjust(bot_padding)}{Fore.WHITE}{random.choice(users_text).capitalize()}")
     wait += 1
+
+    # random flame wars
+    if random.randint(1, 15) > 2:
+        bot_code.check_names(random.choice(bots), random.choice(bots), bot_padding, all_users)

@@ -13,6 +13,12 @@ def clear():
     else:
         _ = system('clear')
 
+def clear_temp_data(files=[]):
+    for file in files:
+        with open(file, "wt") as file:
+            file.seek(0)
+            file.truncate()
+
 def load_system_config():
     """ Loads saved config settings from a file. Accepts no arguments. Returns a dictionary.
     """
@@ -23,10 +29,33 @@ def load_system_config():
 def save_system_config():
     x = 0
 
-def load_current_users():
-    with open("data/current_users.txt") as file:
+def load_bot_users():
+    with open("data/bot_users.txt") as file:
         bots = [line.rstrip('\n') for line in file]
     return bots
+
+def load_all_users():
+    with open("data/all_users.txt") as file:
+        users = [line.rstrip('\n') for line in file]
+    return users
+
+def save_all_users(users):
+    with open("data/all_users.txt", "wt") as file:
+        file.write('\n'.join(users))
+
+def add_user(user):
+    """ Appends user to the  file
+        Argument is the users input as a string. Nothing is returned.
+    """
+    with open("data/all_users.txt", "a") as file:
+        file.write(user + "\n")
+
+def add_bot(user):
+    """ Appends user to the  file
+        Argument is the users input as a string. Nothing is returned.
+    """
+    with open("data/bot_users.txt", "a") as file:
+        file.write(user + "\n")
 
 def load_bot_posts():
     with open("data/bot_posts.txt") as file:
