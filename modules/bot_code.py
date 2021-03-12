@@ -35,7 +35,14 @@ def check_names(speaker, text, padding, all_users):
             print(f"{bot_prompt.rjust(padding)}{Fore.WHITE}{insult}")
             check_names(name, insult, padding, all_users)
 
-def parse_keywords(input):
+def parse_keywords(name, input, padding):
+    bot_prompt = f"{Fore.GREEN}{name.capitalize()}:> "
+    if "!users" in input:
+        print(f"{bot_prompt.rjust(padding)}{Fore.RED}{all_users}")
+
+    if "!insults" in input:
+        print(f"{bot_prompt.rjust(padding)}{Fore.RED}{insults}")
+
     happy = ["happy", ":)", ":D", "happy", "lovely"]
     sad = ["sad"]
     angry = ["angry"]
@@ -44,3 +51,8 @@ def parse_keywords(input):
         for word in input:
             if word in mood:
                 return mood[0]
+
+def admin_commands(name, match):
+    bot_prompt = f"{Fore.GREEN}{name.capitalize()}:> "
+    if match == "!users":
+        name = name
