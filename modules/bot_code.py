@@ -42,6 +42,5 @@ def parse_keywords(input):
     moods = [happy, sad, angry]
     for mood in moods:
         for word in input:
-            print(word)
             if word in mood:
                 return mood[0]

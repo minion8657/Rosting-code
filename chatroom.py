@@ -40,7 +40,7 @@ while True:
     users_text.append(user_input)
     console.log_user_post(user_input)
 
-    print(bot_code.parse_keywords(user_input))
+    user_keyword = bot_code.parse_keywords(user_input))
 
     # bot replies
     bot_selection = random.choice(insults)
