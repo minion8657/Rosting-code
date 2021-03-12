@@ -1,4 +1,5 @@
 import random
+import modules.bot_code as bot_code # we can put our bot functions in here and reference them with bot_code.function_name()
 
 # insults = ["Thats a lame sentence.", "That was a crappy sentence.", "Wow, you should get some English lessons."]
 def random_insult():
@@ -58,6 +59,11 @@ insults = [ random_insult(),
             # "(ノಠ益ಠ)ノ彡┻━┻"]
 print("")
 wait = 0
+
+# testing the bot_code module
+for i in range(10):
+    print(bot_code.get_targeted_insult(bots, ["Hey <$botname$>, whats up?"]))
+
 
 while True:
     # print("(ノಠ益ಠ)ノ彡┻━┻")
